@@ -19,6 +19,8 @@ $HOME/.codex/skills/sukisu-kernel-root
 
 - Default to read-only discovery first.
 - Do not flash partitions, patch boot images, reboot to bootloader, switch slots, or edit kernel sources unless the user explicitly asks.
+- Treat bootloader unlock as a separate OEM capability, not as proof that SukiSU is supported on that device.
+- State plainly that unlocking usually wipes user data and requires physical confirmation on-device.
 - Do not call a device "supported" unless that claim is backed by the current upstream documents or workflow files in `references/supported-devices.md`.
 - Separate these buckets in every answer: `explicitly named`, `clearly in supported range`, `special workflow required`, `manual/source integration required`, `not confirmed`.
 - If the connected device falls outside the documented evidence, say that plainly and stop short of claiming compatibility.
@@ -37,22 +39,29 @@ $HOME/.codex/skills/sukisu-kernel-root/references/supported-devices.md
 $HOME/.codex/skills/sukisu-kernel-root/references/repo-map.md
 ```
 
-3. If a phone is connected, collect facts first:
+3. Read the bootloader unlock reference when the user asks about unlocking:
+
+```text
+$HOME/.codex/skills/sukisu-kernel-root/references/unlock-bootloader.md
+```
+
+4. If a phone is connected, collect facts first:
 
 ```bash
 python3 "$HOME/.codex/skills/sukisu-kernel-root/scripts/collect_device_info.py" --json
 ```
 
-4. Classify the route:
+5. Classify the route:
 - `generic-gki-candidate`: Android 12+ and kernel 5.10+, not in the vendor exception list
 - `oneplus-special-workflow`: OnePlus and other OPPO-family entries handled by the dedicated workflow
 - `source-integration-required`: non-GKI or vendor-modified kernels that need manual integration
 - `blocked-bootloader`: bootloader state prevents flashing work
 
-5. Produce a structured answer with:
+6. Produce a structured answer with:
 - device snapshot
 - evidence-backed support bucket
 - selected repo and workflow
+- unlock method or unlock blocker when relevant
 - exact inputs still needed
 - commands or automation steps
 - risks and stop points
@@ -108,6 +117,16 @@ See:
 $HOME/.codex/skills/sukisu-kernel-root/references/repo-map.md
 ```
 
+## Bootloader Unlock Guidance
+
+When the user asks how to unlock the bootloader:
+
+- Read `references/unlock-bootloader.md` first.
+- Keep `SukiSU support` and `OEM bootloader unlock support` separate.
+- Prefer official sources only for unlock instructions.
+- If a vendor does not provide a clear official unlock path in the current evidence, say `not confirmed from official sources`.
+- Do not present Samsung, OnePlus, or any other vendor as having a universal unlock path unless the current reference explicitly supports that claim.
+
 ## Output Format
 
 Use this structure when answering:
@@ -127,6 +146,7 @@ Use this structure when answering:
 ## Recommended Path
 - Repo:
 - Build or install route:
+- Bootloader unlock path:
 - Inputs still needed:
 
 ## Safety Notes

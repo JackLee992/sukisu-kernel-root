@@ -25,6 +25,7 @@ The skill and docs are prepared and statically checked.
 - `scripts/collect_device_info.py`: read-only `adb` probe and route classifier
 - `references/repo-map.md`: how the upstream SukiSU helper repos fit together
 - `references/supported-devices.md`: explicit model and range coverage, with sources
+- `references/unlock-bootloader.md`: conservative, source-backed bootloader unlock guidance
 
 ## What The Skill Covers
 
@@ -56,6 +57,7 @@ It keeps these categories separate:
 - clearly documented compatibility ranges
 - families that require a dedicated workflow
 - devices that still need source integration
+- devices that may be SukiSU-compatible but do not have a clearly confirmed official bootloader-unlock path
 
 ## Supported Devices Summary
 
@@ -69,6 +71,7 @@ Short version:
 For the full, source-backed list, read:
 
 - [`references/supported-devices.md`](./references/supported-devices.md)
+- [`references/unlock-bootloader.md`](./references/unlock-bootloader.md)
 
 ## Install
 
