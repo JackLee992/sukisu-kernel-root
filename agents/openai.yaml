@@ -1,0 +1,4 @@
+interface:
+  display_name: "SukiSU Kernel Root"
+  short_description: "Automate SukiSU-Ultra kernel root planning and prep"
+  default_prompt: "Use $sukisu-kernel-root to inspect a connected Android device and choose the safest SukiSU-Ultra kernel root path."
